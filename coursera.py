@@ -8,8 +8,8 @@ import sys
 
 def get_courses_list():
     course_count = 20
-    r = requests.get('https://www.coursera.org/sitemap~www~courses.xml')
-    root = etree.fromstring(r.content)
+    request = requests.get('https://www.coursera.org/sitemap~www~courses.xml').content
+    root = etree.fromstring(request)
     list_of_random_courses = random.sample([course[0].text for course in 
         root], course_count)
     return list_of_random_courses
