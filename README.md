@@ -1,6 +1,6 @@
 # Coursera Dump
 
-[TODO. There will be project description]
+This script takes 20 random courses from coursera.org xml feed, collects info about them and writes it to xlsx file.
 
 # Project Goals
 
