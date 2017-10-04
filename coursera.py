@@ -1,11 +1,11 @@
-from lxml import etree
-import requests
+import sys
+import argparse
 import random
+import requests
+from lxml import etree
 from bs4 import BeautifulSoup
 from openpyxl import Workbook
 from openpyxl.styles import Alignment, Font
-import sys
-import argparse
 
 COURSE_XML = 'https://www.coursera.org/sitemap~www~courses.xml'
 COURSE_COUNT = 20
