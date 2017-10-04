@@ -76,7 +76,7 @@ def fill_worksheet(worksheet, courses):
     horizontal_columns = {'date_start', 'weeks', 'rating'}
     for column_id, column in columns_order.items():
         current_value_list = [course[column_id] if course[column_id] is not
-                              None else "N/A" for course in courses]
+                              None else 'N/A' for course in courses]
         for current_number, current_value in enumerate(current_value_list, 2):
             current_cell = worksheet['{}{}'.format(column, current_number)]
             current_cell.value = current_value
@@ -108,17 +108,17 @@ def save_workbook(workbook, filepath):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description="coursera.org parser")
-    parser.add_argument("path_to_xlsx",
-                        help="path to xlsx file with results")
+    parser = argparse.ArgumentParser(description='coursera.org parser')
+    parser.add_argument('path_to_xlsx',
+                        help='path to xlsx file with results')
     args = parser.parse_args()
     workbook = Workbook()
     worksheet = workbook.active
     file_output = args.path_to_xlsx
-    print("Taking 20 random courses and fetching html for each of them...")
+    print('Taking 20 random courses and fetching html for each of them...')
     courses_parsed_info = [get_course_info(fetch_html(course)) for course in
                            fetch_xml()]
-    print("Filling xlsx with courses' info...")
+    print('Filling xlsx with courses' info...')
     filled_xlsx = fill_worksheet(worksheet, courses_parsed_info)
     save_workbook(workbook, file_output)
     print('Done, check {}'.format(file_output))
