@@ -1,11 +1,12 @@
 import sys
 import argparse
 import random
-import requests
 from lxml import etree
+import requests
 from bs4 import BeautifulSoup
 from openpyxl import Workbook
 from openpyxl.styles import Alignment, Font
+
 
 COURSE_XML = 'https://www.coursera.org/sitemap~www~courses.xml'
 COURSE_COUNT = 20
@@ -14,8 +15,8 @@ COURSE_COUNT = 20
 def fetch_xml():
     request = requests.get(COURSE_XML).content
     root = etree.fromstring(request)
-    list_of_random_courses = random.sample([course[0].text for course in
-                                            root], COURSE_COUNT)
+    list_of_random_courses = random.sample(
+        [course[0].text for course in root], COURSE_COUNT)
     return list_of_random_courses
 
 
@@ -109,8 +110,8 @@ def save_workbook(workbook, filepath):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='coursera.org parser')
-    parser.add_argument('path_to_xlsx',
-                        help='path to xlsx file with results')
+    parser.add_argument(
+        'path_to_xlsx', help='path to xlsx file with results')
     args = parser.parse_args()
     workbook = Workbook()
     worksheet = workbook.active
@@ -118,7 +119,7 @@ if __name__ == '__main__':
     print('Taking 20 random courses and fetching html for each of them...')
     courses_parsed_info = [get_course_info(fetch_html(course)) for course in
                            fetch_xml()]
-    print('Filling xlsx with courses' info...')
+    print('Filling xlsx with courses info...')
     filled_xlsx = fill_worksheet(worksheet, courses_parsed_info)
     save_workbook(workbook, file_output)
     print('Done, check {}'.format(file_output))
