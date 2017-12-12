@@ -1,4 +1,3 @@
-import sys
 import argparse
 import random
 from lxml import etree
@@ -63,7 +62,7 @@ def fill_worksheet(worksheet, courses):
     worksheet['A1'] = '№'
     worksheet.column_dimensions['A'].width = 10.0
     for course_number, cell in \
-            enumerate(worksheet['A2':'A{}'.format(COURSE_COUNT+1)], 1):
+            enumerate(worksheet['A2':'A{}'.format(COURSE_COUNT + 1)], 1):
         cell[0].value = course_number
         cell[0].alignment = Alignment(horizontal='center')
     # To change columns order in future just change values of keys
@@ -73,7 +72,7 @@ def fill_worksheet(worksheet, courses):
         'date_start': 'D',
         'weeks': 'E',
         'rating': 'F',
-        }
+    }
     horizontal_columns = {'date_start', 'weeks', 'rating'}
     for column_id, column in columns_order.items():
         current_value_list = [course[column_id] if course[column_id] is not
@@ -123,4 +122,3 @@ if __name__ == '__main__':
     filled_xlsx = fill_worksheet(worksheet, courses_parsed_info)
     save_workbook(workbook, file_output)
     print('Done, check {}'.format(file_output))
-    sys.exit()
